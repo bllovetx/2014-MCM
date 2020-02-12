@@ -1,0 +1,29 @@
+\section{The speed model}
+Now, one of the core issues we're looking at is how to simulate vehicle speed to further simulate the process of overtaking. In order to build such a model, we need some basic assumptions:
+\begin{itemize}
+	\item All the drivers obey the traffic rules. They drive within the speed limit.
+	\item There is no obvious distribution trend of drivers in the obtained sample interval, which is a random sample.
+	\item The velocity frequency distribution of the driver in the created model is similar to that in the sample we collected.
+\end{itemize}
+With these assumptions, we can start with the sample data to create a reasonable model of the velocity and frequency distribution. Here, since the probability of occurrence of each velocity is independent, and we simulate the probability of occurrence in an interval, this is equivalent to the conditions applicable to the poisson distribution. Therefore, we first establish the distribution model, and then use the data to test its fitting degree.
+\subsubsection{title}
+\subsubsection{Distribution model}
+For convenience, let the observed period of time be $[0,1)$, take natural number $n=$, divide the period of time $[0,1)$ into n segments of equal length:
+\begin{equation}
+	l_1=[0,\frac{1}{n}],l_2=[\frac{1}{n},\frac{2}{n}],\cdots,l_i=[\frac{i-1}{n},\frac{i}{n}],\cdots,l_n=[\frac{n-1}{n},1]
+\end{equation}
+We make the following two assumptions:
+\begin{itemize}
+	\item In each segment $l_i$, the probability of exactly one accident is approximately proportional to the length of $\frac{i}{n}$ the period, which can be set as $\frac{\lambda}{n}$.Given n as 40. It's impossible to have two or more accidents in such a short period of time. So the probability of $l_i$ not having an accident during this period of time is $1-\frac{\lambda}{n}$.
+	\item $l_1,\cdots,l_n$ Each paragraph is independent of whether an accident occurred
+\end{itemize}
+Taking the number of accidents in time period $[0,1)$ as the number of periods of accidents in the hour period $l_1,\cdots,l_n$ after $n$ divisions, then according to the above two assumptions, $\chi$ should follow the binomial distribution $B(n,\frac{\lambda}{n})$. Thus, we have:
+\begin{equation}
+	P(X=i)=C_n^i(\frac{\lambda}{n})^i(1-\frac{\lambda}{n})^(n-i)
+\end{equation}
+Thus
+\begin{eqnarray}
+P(X=i)&=&C_n^i(\frac{\lambda}{n})^i(1-\frac{\lambda}{n})^(n-i)\nonumber \\
+&=&\frac{e^(-\lambda)\lambda^i}{i!}
+\end{eqnarray}
+Here we shall take $\lambda=17.6$.

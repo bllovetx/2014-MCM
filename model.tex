@@ -1,0 +1,67 @@
+\section*{title}
+\section*{The safety mdoel}
+Here it comes to one core problem, how to rate the safety factor when so many cars are smoothly driving on the high way. As we assume above, all the cars are driving with uniform velocity on a straight highway, and when a car behind has the higher velocity, it may want to overtake. If the car behind keeps the distance enough all the overtaking process, this process should be safe. All the danger comes when two cars wants to overtake the same car, and they are so close that may cause an accident. So we should find a parameter to measure security, that is the safe distance.
+\subsubsection{The safe distance on the straight highway}
+Here we want to find an enough distance to keep safe during two cars driving on the straight highway. We consider this model below: the first car is driving with the velocity $v_1$ and suddenly there is  an emergency, it start decelerating with maximum braking with the acceleration $a$ w.r.t. time $t$. After $t_0$ seconds, the car behind notice the abnormal phenomenon and decelerating with the acceleration $a$(As we assume all the cars are same). Assume the initial distance keeps $x_0$ to avoid the accident. When these two cars stop, the distance they drived are $x_1$,$x_2$,respectively.Then we have
+\begin{eqnarray}
+x_0&\geq&x_2-x_1\nonumber \\
+&=&\frac{v_2^2}{2a}+v_2t_0-\frac{v_1^2}{2a}\nonumber \\
+&=&\frac{v_2^2-v_1^2}{2a}+v_2t_0
+\end{eqnarray}
+Here we need these parameters below:
+\begin{table}[parameters]
+	\begin{tabular}{|l|l|l|}
+		\hline
+		& the first car & the second car \\ \hline
+		initial velocity & $v_1$          & $v_2$           \\ \hline
+		acceleration     & $a$            & $a$              \\ \hline
+		response time    & \diagbox       & $t_0$           \\ \hline
+	\end{tabular}
+\end{table}
+Here we give some assumptions：
+\begin{itemize}
+	\item The car behind often does not know the exact speed of the car in front of it, so there is a need to estimate the speed of the car in front, that means we shall use $v_1'=v_1\pm5$ to replace $v_1$, to be on the safe side, we take $v_1'=v_1-5$.
+	\item Here $t_0$ is a parameter w.r.t the driver and the system. The driver starts to press the brake pedal until the end of braking. The whole process of automobile braking includes four stages: reaction time of $T_a$ braking system, functioning time of $T_b$ brake (coordination time), $T_c$ continuous braking time and $T_d$ relaxing brake., so we shall take a more secure value.
+	\item Highway distance signs are required to be placed at intervals of one kilometer, so we have to take the distance gap into consideration. That means we shall take $x_0'=x_0+10$.
+\end{itemize}
+Under the assumption above, we only need to consdider the acceleration $a$ w.r.t time $t$ and the reponse time $t_0$. As different kinds of braking system, the cars have different braking acceleration. Here is the figure that draw the most widely used two systems and their acceration:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/im1.png}
+	\caption{figure 1} 
+	\label{pngsample}
+\end{figure}
+As the cars' speed are under 33m/s,the car will be stopped in three seconds under both these systems. Caculate the average accleration, we have the range from 10.03 to 13.35(m/s). For the safety, we shall take 10 as the accleration $a$.
+As for the response time $t_0$, we consider the next two part, the first one is the driver's response time. We selected 1000 drivers who passed the highway reaction speed test and drew the following bar chart:
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/im2.png}
+	\caption{figure 2} 
+	\label{pngsample}
+\end{figure}
+From the chart, we shall assmume the response time as 0.9s with Bayes estimation.\footnote{1}
+
+For the next part, we have four subparts.
+A. Reaction time of the braking system. As the driver steps on the pedal, it takes time for the pedal to overcome free travel and brake clearance. The reaction time of the general hydraulic braking system is 0.015s-0.03s for Ta. The car did not slow down for the moment.
+
+B. Brake operating timeAfter the working time of the brake passes Tb, the braking pressure increases rapidly to the maximum, and the working time of the general hydraulic braking system Tb is 0.15s-0.3s. The car slowed down at that time.
+
+C. Tc is the continuous braking time, during which the braking deceleration speed is relatively stable, while Td is the brake release time, during which the driver relaxes the brake pedal and the braking process ends. The braking release time shall not be greater than 0.8s.
+
+Thus we have the estimation:
+\begin{eqnarray}
+x_0'&=&\frac{v_2^2-v_1'^2}{2a}+v_2t_0\nonumber \\
+&=&\frac{v_2^2}{20}+v_2t_0-\frac{(v_1-5)^2}{20}+v_2*1.12 \\
+\end{eqnarray}
+\section*{The overtaking model}
+Here, according to the previous hypothesis, we do not need to build a very robust overtaking model, but only need to consider that when a car is overtaking on lane change, a two-lane vehicle within a safe distance from the car will still be at great risk. In this way, we only need to find the time for a car to change lanes on the highway, and in this time, assuming it occupies two lanes, we can use it as our overtaking model.
+
+We still use the method of data collection and induction of estimated data to reach a relatively reasonable conclusion, which USES an estimation method to make no difference estimation.\footnote{2}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/im3.png}
+	\caption{figure 3} 
+	\label{pngsample}
+\end{figure}
+
+Based on the theory of no-difference estimation, we obtained an estimated value of 3.6.
